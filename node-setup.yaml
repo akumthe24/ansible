@@ -1,0 +1,23 @@
+---
+- name: TO setup the Koy Network Node
+  hosts: Koy-node
+  gather_facts: ture
+  tasks:
+
+
+  - name: For remote access allow 22 port 
+    ufw:
+      state: enabled
+      rule: allow
+      port: 22
+      proto: tcp
+
+  - name: Download the AntelopeIO Software
+    get_url:
+      url: https://github.com/AntelopeIO/leap/releases/download/v3.2.1/leap_3.2.1-ubuntu22.04_amd64.deb
+      dest: /root/                          
+
+
+  - name: Installtion of the AntelopeIO Software on Node
+    apt:
+     deb: /root/leap_3.2.1-ubuntu22.04_amd64.deb
